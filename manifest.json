@@ -1,36 +1,41 @@
 {
   "manifest_version": 3,
-  "name": "Brostagma Analiz Trendyol Eklentisi",
-  "version": "3.6.2",
-  "description": "XLSX hedef liste ile kampanya eşleşmeleri.",
-  "permissions": ["storage"],
-  "host_permissions": ["*://*.trendyol.com/*"],
+  "name": "Trendyol Kampanya Tarayıcı — Emin Pro",
+  "version": "3.9.5",
+  "description": "XLSX hedef liste ile esnek eşleşme. İkinci tarama + Şüpheli ayıklama + DC kapısı.",
+  "permissions": [],
+  "host_permissions": ["https://*.trendyol.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://*.trendyol.com/*"],
+      "run_at": "document_idle",
+      "css": ["content/styles.css"],
+      "js": [
+        "vendor/gm-polyfill.js",
+        "vendor/xlsx.full.min.js",
+        "vendor/FileSaver.min.js",
 
-  "icons": {
-    "16": "icons/icon16.png",
-    "32": "icons/icon32.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png",
-    "256": "icons/icon256.png"
-  },
+        "content/core/cfg.js",
+        "content/core/state.js",
+        "content/core/util.js",
+        "content/core/lexicon.js",
+        "content/core/autofilter.js",
+        "content/core/match.js",
+        "content/core/catalog.js",
 
-  "action": {
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "32": "icons/icon32.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
-    },
-    "default_title": "Brostagma Analiz Trendyol Eklentisi"
-  },
+        "content/engine/observers.js",
+        "content/engine/scan.js",
+        "content/engine/deepCampaign.js",
 
-  "content_scripts": [{
-    "matches": ["*://*.trendyol.com/*"],
-    "run_at": "document_idle",
-    "js": [
-      "vendor/xlsx.full.min.js",
-      "vendor/FileSaver.min.js",
-      "content.js"
-    ]
-  }]
+        "content/ui/panel.js",
+
+        "content/flows/quickScan.js",
+        "content/flows/targets.js",
+        "content/export/xlsx.js",
+
+        "content/app.js",
+        "content/boot.js"
+      ]
+    }
+  ]
 }
